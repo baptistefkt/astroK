@@ -1,36 +1,43 @@
 import React from 'react'
 import styled from 'styled-components'
-import { StyledNotVisibleXS, StyledVisibleXS, StyledButton } from './commonStyled'
-import pancakeSvg from './pancake.svg'
-import logo from './LunarEclipseDark.png'
+import { StyledNotVisibleXS, StyledVisibleXS, StyledButton } from '../style/commonStyled'
+import pancakeSvg from '../assets/pancake.svg'
+import logo from '../assets/astro-logo.png'
 
 
 const StyledHeaderContainer = styled.header`
   position: fixed;
   top: 0;
-  background-color: #552a2a;
-  font-size: 26px;
+  background-color: ${props => props.theme.background};
+  font-size: 22px;
   font-weight: bold;
   padding: 15px;
   width: 100%;
-  color: white;
+  color: ${props => props.theme.black};
   height: 60px;
-  z-index: 20;
+  z-index: 200;
   line-height: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid ${props => props.theme.border};
 
   .logo {
-    width: 240px;
+    width: 50px;
     height: auto;
-    opacity: 0.8;
   }
 `
+
+const StyledLogoContainer = styled.div`
+  span {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+`
+
 const StyledPancakeButton = styled(StyledButton)`
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 10px 20px 20px 0px rgba(35, 11, 11, 1);
     transition-duration: 0.2s;
   }
 
@@ -50,7 +57,10 @@ const StyledMenuButton = styled(StyledButton)`
 export function Header({ onclick }) {
   return (
     <StyledHeaderContainer>
-      <img className="logo" src={logo} alt="lunar-eclipse-logo" />
+      <StyledLogoContainer>
+        <img className="logo" src={logo} alt="lunar-eclipse-logo" />
+        <span>Astrokitties</span>
+      </StyledLogoContainer>
       <StyledNotVisibleXS>
         <a href="#">
           <StyledPancakeButton>

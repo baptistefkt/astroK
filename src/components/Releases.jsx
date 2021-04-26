@@ -1,15 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Article } from './Article'
-import { SmallHero } from './SmallHero'
-import contractImg from './contract-token-initiated.jpg'
-import crypto from './crypto.jpg'
+import contractImg from '../assets/contract-token-initiated.jpg'
+import crypto from '../assets/crypto.jpg'
 
 
 const StyledReleasePage = styled.div`
   margin-top: 60px;
   padding: 20px;
-  background-color: #1e0909;
 `
 
 const StyledGrid = styled.div`
@@ -28,17 +26,17 @@ const StyledGrid = styled.div`
 export function Releases() {
   return (
     <StyledReleasePage>
-      <SmallHero title={"Press releases."} />
+      <h1>Press releases</h1>
       <StyledGrid>
         <Article 
-          title="Eclipse Token Contract Initiated"
-          description="Today we initiated the development of the unique Eclipse Token Contract. A carefully planned out process of an experienced team of Crypto-developers."
+          title="Astrokitties Token Contract Initiated"
+          description="Today we initiated the development of the unique Astrokitties Token Contract. A carefully planned out process of an experienced team of Crypto-developers."
           link="/eclipse-token-contract-initiated/"
           imgSrc={contractImg}
         />
         <Article 
           title="Lorem Ipsum"
-          description="Today we initiated the development of the unique Eclipse Token Contract. A carefully planned out process of an experienced team of Crypto-developers."
+          description="Today we initiated the development of the unique Astrokitties Token Contract. A carefully planned out process of an experienced team of Crypto-developers."
           link="/lorem-ipsum/"
           imgSrc={crypto}
         />

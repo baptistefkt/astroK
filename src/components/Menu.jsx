@@ -3,24 +3,26 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTachometerAlt, faChartBar, faChartLine, faRss, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import { faDiscord, faReddit, faTelegramPlane, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import pancakeSvg from './pancake.svg'
-import bscscan from './bscscan-logo.svg'
+import pancakeSvg from '../assets/pancake.svg'
+import bscscan from '../assets/bscscan-logo.svg'
 import { Link } from 'react-router-dom'
 
 const StyledMenuContainer = styled.div`
   position: fixed;
   top: 60px;
   width: 200px;
-  background: linear-gradient(142deg, #2a1617, #0000001f);
+  background-color: ${props => props.theme.background};
   left: 0;
   height: calc(100vh - 60px);
   min-height: 740px;
-  padding: 15px;
+  padding: 24px;
   box-sizing: border-box;
+  border-right: 1px solid ${props => props.theme.border};
+  z-index: 100;
 
   a {
     text-decoration: none;
-    color: #d6dbff;
+    color: ${props => props.theme.black};
     font-size: 10px;
   }
 
@@ -28,11 +30,9 @@ const StyledMenuContainer = styled.div`
     width: 100%;
     left: ${(props) => props.menuOpen ? '0' : '-100vw'};
     transition-duration: 0.4s;
-    z-index: 3;
-    background: linear-gradient(142deg, #402121, #26100a);
-    padding: 30px;
-    min-height: unset;
-  }
+    background: #fafafa;
+      min-height: unset;
+    }
 `
 
 const StyledMenuBlock = styled.div`
@@ -42,9 +42,9 @@ const StyledMenuBlock = styled.div`
 `
 
 const StyledMenuTitle = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: #a97a7a;
+  color: #888888;
   margin-top: 20px;
   height: 20px;
 `
@@ -64,11 +64,11 @@ const StyledMenuItems = styled.div`
   &:hover {
     svg, img {
       transform: scale(1.2);
-      color: white;
+      color: ${props => props.theme.black};
     }
     span {
       padding-left: 11px;
-      color: white;
+      color: ${props => props.theme.black};
     }
   }
 
@@ -103,10 +103,9 @@ const StyledButton = styled.button`
   height: 50px;
   float: left;
   margin-top: 15px;
-  background: #4e2727;
+  background: ${props => props.theme.background};
   border-radius: 5px;
-  border: 2px solid #804b4b;
-  box-shadow: 10px 20px 20px 0px rgba(35, 11, 11, 0.8);
+  border: none;
 
   transition-duration: 0.2s;
   position: relative;
@@ -114,7 +113,6 @@ const StyledButton = styled.button`
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 10px 20px 20px 0px rgba(35, 11, 11, 1);
     transition-duration: 0.2s;
   }
 `

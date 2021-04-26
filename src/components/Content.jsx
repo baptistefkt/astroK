@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import logo from './LunarEclipseDark.png'
+import logo from '../assets/astro-logo.png'
 import { Routes } from './Routes'
 
 
@@ -15,22 +15,27 @@ const StyledContentContainer = styled.div`
 `
 
 const StyledFooter = styled.footer`
-  background-color: #1a0101;
+  background-color: ${props => props.theme.background};
   height: 100px; 
-  margin-top: -60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #272b4e;
+  color: ${props => props.theme.black};
   font-size: 25px;
+  z-index: 99;
 
-  @media (max-width: 899px) {
-    margin-top: 50px;
-  }
 
   img {
-    width: 200px;
+    width: 30px;
+    filter: grayscale(100%);
     opacity: 0.5;
+  }
+
+  span {
+    margin-left: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 0.4;
   }
 `
 
@@ -38,7 +43,10 @@ export function Content() {
   return (
     <StyledContentContainer>
       <Routes />
-      <StyledFooter><img src={logo} alt="lunar-eclipse-logo"/></StyledFooter>
+      <StyledFooter>
+        <img src={logo} alt="lunar-eclipse-logo"/>
+        <span>Astrokitties</span>
+      </StyledFooter>
     </StyledContentContainer>
   )
 }

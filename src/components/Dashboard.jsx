@@ -1,21 +1,27 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { Hero } from './Hero'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoins, faRecycle, faFire, faMoneyBill, faUser, faCheck, faHourglass } from '@fortawesome/free-solid-svg-icons'
-import { StyledButton } from './commonStyled'
-import safe from './safe.png'
-import hold from './hold.png'
-import profit from './profit.png'
+import { StyledButton } from '../style/commonStyled'
+import locker from '../assets/locker.png'
+import coin from '../assets/coin.png'
+import community from '../assets/community.png'
+import liquidityPool from '../assets/liquiditypool.png'
+import ship from '../assets/space-ship.png'
+import rocket from '../assets/rocket.png'
+
+const StyledDashboard = styled.div`
+  background: rgb(222,168,218);
+  background: linear-gradient(135deg, rgba(161,209,224,0.2) 20%, rgba(222,168,218,0.2) 80%);
+`
 
 const StyledGrid = styled.div`
-  margin-top: 60px;
-  padding: 20px;
-  background-color: #1e0909;
+  padding: 20px 20px 60px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 30px;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
   grid-row-gap: 20px;
 
   @media (max-width: 899px) {
@@ -24,16 +30,18 @@ const StyledGrid = styled.div`
   }
 
   > div, article {
-    background: linear-gradient(142deg, #2a1617, #292e634a);
-    border-radius: 8px;
+    background: ${props => props.theme.background};
+    border-radius: 16px;
+    z-index: 80;
+    box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
   }
 `
 
 const StyledArticle = styled.article`
   min-height: 200px;
   max-height: 591px;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 24px;
 
   @media (max-width: 899px) {
     max-height: unset;
@@ -44,12 +52,11 @@ const StyledArticle = styled.article`
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 700;
-    color: white;
+    color: ${props => props.theme.black};
     line-height: 1.2;
 
     small {
-      color: #c47b70;
-      text-shadow: 0px 0px 6px #934646;
+      color: ${props => props.theme.black};
       font-size: 12px;
       font-weight: 400;
       padding-left: 10px;
@@ -58,7 +65,7 @@ const StyledArticle = styled.article`
   }
 
   p {
-    color: #bf7979;
+    color: ${props => props.theme.black};
     font-size: 14px;
     margin-top: 30px;
   }
@@ -78,42 +85,44 @@ const StyledArticle = styled.article`
     width: 22px;
     height: 22px;
     border-radius: 5px;
-    background: #bd886a;
-    border: 2px solid #ecc56a;
+    background: rgba(161,209,224, 0.2);
+    border: 2px solid rgb(161,209,224);
     text-align: center;
     float: left;
     font-size: 12px;
     line-height: 18px;
     margin-right: 10px;
-    color: white;
+    color: ${props => props.theme.black};
   }
 
   .left {
-    color: white;
+    color: ${props => props.theme.black};
     font-weight: 600;
   }
   .right {
-    color: #f9c28c;
+    color: ${props => props.theme.black};
     font-size: 12px;
   }
 
   .bolder {
     font-weight: 700;
-    color: #bf7979;
+    color: ${props => props.theme.black};
     display: block;
   }
 `
 
 const StyledBigArticle = styled(StyledArticle)`
   grid-column: 1/3;
-  grid-row: 3/5;
+  grid-row: 2/4;
+  max-height: unset;
 
   .flexContent {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+   
     @media (max-width: 899px) {
+      display: flex;
       flex-direction: column;
     }
   }
@@ -121,13 +130,9 @@ const StyledBigArticle = styled(StyledArticle)`
   .items {
     padding: 20px;
     text-align: center;
-    background-color: transparent;
-    background-image: linear-gradient(142deg, #351b1d, #351b1d4a);
-    border-radius: 10px;
-    margin: 0 15px;
-    flex: 1;
-    min-height: 370px;
-    height: 100%;
+    border-radius: 16px;
+    /* margin: 0 15px; */
+    border: 1px solid ${props => props.theme.border};
 
     @media (max-width: 899px) {
       min-height: unset;
@@ -140,19 +145,19 @@ const StyledBigArticle = styled(StyledArticle)`
     font-size: 20px;
     font-weight: 600;
     margin-top: 20px;
-    color: white;
+    color: ${props => props.theme.black};
     line-height: 1.2;
   }
 
   img {
-    width: 65px;
-    height: 65px;
+    width: 120px;
+    height: 120px;
   }
 `
 
 const StyledRoadMap = styled(StyledArticle)`
   grid-column: 3/4;
-  grid-row: 3/5;
+  grid-row: 2/4;
 
   .row {
     display: flex;
@@ -168,51 +173,115 @@ const StyledRoadMap = styled(StyledArticle)`
     height: 17px;
     border-radius: 5px;
     text-align: center;
-    color: white;
-    margin-right: 10px;
+    color: ${props => props.theme.black};
+    margin-right: 8px;
   }
 
   .complete {
-    background: #47ab5d;
-    border: 2px solid #53ff79;
+    background: rgba(71, 171, 93, 0.4);
+    border: 2px solid rgb(71, 171, 93);
   }
 
   .pending {
-    background: #d67b1e;
-    border: 2px solid #ffae5b;
+    background: rgba(238, 141, 43, 0.4);
+    border: 2px solid rgb(238, 141, 43);
   }
 
   .notComplete {
-    background: #4f2222;
-    border: 2px solid #8e5050;
+    background: rgba(161,209,224, 0.2);
+    border: 2px solid rgb(161,209,224);
   }
 
   .text {
-    color: white;
+    color: ${props => props.theme.black};
     font-size: 12px;
     font-weight: 600;
-
+    
     span {
-      color: #53ff79;
+      margin-left: 4px;
+      color: rgb(71, 171, 93);
       font-size: 80%;
     }
 
     .orange {
-      color: #ffae5b;
+      color: rgb(238, 141, 43);
     }
   }
 `
 
+const fly = keyframes`
+	98.001%, 0% {
+    display: block;
+		transform: translateX(-200%) translateY(100vh) rotateZ(0deg)
+	}
+
+	15% {
+		transform: translateX(100vw) translateY(-100%) rotateZ(180deg)
+	}
+
+	15.001%, 18% {
+		transform: translateX(100vw) translateY(-30%) rotateZ(0deg)
+	}
+
+	40% {
+		transform: translateX(-200%) translateY(3vh) rotateZ(-180deg)
+	}
+
+	40.001%, 43% {
+		transform: translateX(-200%) translateY(-100%) rotateZ(-180deg)
+	}
+
+	65% {
+		transform: translateX(100vw) translateY(50vh) rotateZ(0deg)
+	}
+
+	65.001%, 68% {
+		transform: translateX(20vw) translateY(-200%) rotateZ(180deg)
+	}
+
+	95% {
+		transform: translateX(10vw) translateY(100vh) rotateZ(0deg)
+	}
+`
+
+const StyledRocket = styled.img`
+  width: 150px;
+  height: auto;
+  transform: translateX(-120%) translateY(-120%) rotateZ(0);
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 60;
+  animation: ${fly} 50s linear infinite;
+  @media (max-width: 899px) {
+    width: 100px;
+  }
+
+`
+const StyledShip = styled.img`
+  width: 120px;
+  height: auto;
+  transform: translateX(-120%) translateY(-120%) rotateZ(0);
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 60;
+  animation: ${fly} 80s linear infinite;
+  animation-direction: reverse;
+`
+
 export function Dashboard() {
   return (
-    <StyledGrid>
-        <Hero />
+    <div style={{backgroundColor: 'white'}}>
+      <StyledDashboard>
+      <Hero />
+      <StyledGrid>
         <StyledArticle>
           <h4>
-            About Lunar Eclipse
+            About Astrokitties
             <small>Brief description</small>
           </h4>
-          <p>We are tired of all the scams that happen among tokens. So we decided to take matters into our own hands. That's why we created ECLIPSE, with the intention of being 100% safe from rug pulls. How? Because we, the devs have no rugs to pull. This token is for you, let's moon.</p>
+          <p>We are tired of all the scams that happen among tokens. So we decided to take matters into our own hands. That's why we created Astrokitties, with the intention of being 100% safe from rug pulls. How? Because we, the devs have no rugs to pull. This token is for you, let's moon.</p>
         </StyledArticle>
         <StyledArticle>
           <h4>
@@ -274,7 +343,7 @@ export function Dashboard() {
           </h4>
           <p>
             <i>
-              "Eclipse is a new competitor in the meme-coin space that has gained a large community following in a short timeframe.
+              "Astrokitties is a new competitor in the meme-coin space that has gained a large community following in a short timeframe.
               <br/><br/>
               No security issues were identified in our analysis."
             </i>
@@ -289,23 +358,28 @@ export function Dashboard() {
         <StyledBigArticle>
           <h4>
             Points of interest
-            <small>Reasons why to own Eclipse</small>
+            <small>Reasons why to own Astrokitties</small>
           </h4>
           <div className="flexContent">
             <div className="items one">
-              <img src={safe} alt=""/>
+              <img src={locker} alt=""/>
               <h3>Completely Secured</h3>
               <p>Audited smart contract, no big devs holdings (all burnt from start), Liquidity Pool locked for 5 years!</p>
             </div>
             <div className="items two">
-              <img src={hold} alt=""/>
+              <img src={coin} alt=""/>
               <h3>Rewarding for Holders</h3>
-              <p>Keep holding your Eclipse tokens, and you will earn more. For each transaction, a 3% fee is sent back to our beloved holders.</p>
+              <p>Keep holding your Astrokitties tokens, and you will earn more. For each transaction, a 3% fee is sent back to our beloved holders.</p>
             </div>
             <div className="items three">
-              <img src={profit} alt=""/>
+              <img src={community} alt=""/>
               <h3>Inventive Construction</h3>
-              <p>With a combination of burning, automatic LP filling and rewarding of holders, Eclipse is set to rise!</p>
+              <p>With a combination of burning, automatic LP filling and rewarding of holders, Astrokitties is set to rise!</p>
+            </div>
+            <div className="items three">
+              <img src={liquidityPool} alt=""/>
+              <h3>Inventive Construction</h3>
+              <p>With a combination of burning, automatic LP filling and rewarding of holders, Astrokitties is set to rise!</p>
             </div>
           </div>
         </StyledBigArticle>
@@ -348,7 +422,7 @@ export function Dashboard() {
             <div className="icon complete">
               <FontAwesomeIcon icon={faCheck} />
             </div>
-            <div className="text">Audit Eclipse Smart Contract <span>Completed</span></div>
+            <div className="text">Audit Astrokitties Smart Contract <span>Completed</span></div>
           </div>
           <div className="row">
             <div className="icon complete">
@@ -393,7 +467,11 @@ export function Dashboard() {
             <div className="text">Listing on Exchange</div>
           </div>
         </StyledRoadMap>
+        <StyledRocket src={rocket} />
+        <StyledShip src={ship} />
       </StyledGrid>
+      </StyledDashboard>
+    </div>
   )
 }
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './style/index.css';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import 'typeface-poppins';
+import 'typeface-rubik';
 
 ReactDOM.render(
   <React.StrictMode>

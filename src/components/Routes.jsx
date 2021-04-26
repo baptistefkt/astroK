@@ -14,12 +14,12 @@ export function Routes() {
       <Switch>
         <Route path="/eclipse-token-contract-initiated/">
           <ArticlePage
-            title="Eclipse Token Contract Initiated"
+            title="Astrokitties Token Contract Initiated"
             date="Posted on February 22, 2021"
             paragraph={[
-              "Today we initiated the development of the unique Eclipse Token Contract. A carefully planned out process of an experienced team of Crypto-developers.",
+              "Today we initiated the development of the unique Astrokitties Token Contract. A carefully planned out process of an experienced team of Crypto-developers.",
               "We are looking forward to sharing our journey with the community!",
-              "Eclipse – By the community, for the community!",
+              "Astrokitties – By the community, for the community!",
             ]}
           />
         </Route>

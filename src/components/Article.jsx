@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const StyledArticleContainer = styled.div`
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 20px;
-  background-color: transparent;
-  background-image: linear-gradient(142deg, #351b1d, #351b1d4a);
   min-height: 370px;
   height: 100%;
+  background: ${props => props.theme.background};
+  box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
 
   img {
     width: 100%;
@@ -22,29 +22,27 @@ const StyledArticleContainer = styled.div`
     margin-bottom: 20px;
     font-size: 18px;
     font-weight: 700;
-    color: white;
+    color: ${props => props.theme.black};
     line-height: 1.2;
   }
 
   p {
-    color: #bf7979;
+    color: ${props => props.theme.black};
     font-size: 14px;
     margin-top: 30px;
   }
 
   a {
     text-decoration: none;
-    color: white;
+    color: ${props => props.theme.black};
     font-size: 12px;
     font-weight: 600;
-    text-shadow: 0px 0px 6px #4e469300;
     transition-duration: 0.2s;
 
     &:hover {
       text-decoration: none;
       transition-duration: 0.2s;
-      color: #ecc56a;
-      text-shadow: 0px 0px 6px #934646;
+      color: ${props => props.theme.black};
     }
   }
 `
