@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import Sky from 'react-sky'
 import { Hero } from './Hero'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

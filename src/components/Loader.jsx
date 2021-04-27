@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import ship from '../assets/space-ship.png'
-import shadow from '../assets/test.svg'
 
 const float = keyframes`
   50% {

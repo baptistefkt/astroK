@@ -3,15 +3,6 @@ import styled, { keyframes } from 'styled-components'
 import logo from '../assets/logo-big.png'
 
 
-const spin = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
 const float = keyframes`
   50% {
     transform: translate(0, 20px);
