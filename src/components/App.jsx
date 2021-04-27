@@ -13,10 +13,6 @@ const StyledAppContainer = styled.div`
   background: linear-gradient(135deg, rgba(161,209,224,0.3) 20%, rgba(222,168,218,0.3) 80%);
   box-sizing: border-box;
   font-family: 'Rubik', sans-serif;
-
-  small {
-    color: rgb(161,209,224);
-  }
 `
 
 const StyledLoaderContainer = styled.div`

@@ -20,6 +20,10 @@ const StyledMenuContainer = styled.div`
   border-right: 1px solid ${props => props.theme.border};
   z-index: 100;
 
+  @media (max-width: 899px) {
+      padding: 42px;
+    }
+
   a {
     text-decoration: none;
     color: ${props => props.theme.black};
@@ -53,10 +57,16 @@ const StyledMenuItems = styled.div`
   line-height: 30px;
   letter-spacing: 0;
   font-weight: 500;
+  @media (max-width: 899px) {
+      margin-bottom: 8px;
+    }
   span {
     font-size: 12px;
     padding-left: 8px;
     transition: 0.2s;
+    @media (max-width: 899px) {
+      font-size: 16px;
+    }
   }
   svg {
     transition: 0.2s;
