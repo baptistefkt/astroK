@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import { StyledNotVisibleXS } from '../style/commonStyled'
-import moon from '../assets/moon.svg'
+import logo from '../assets/logo-big.png'
 
 
 const spin = keyframes`
@@ -13,76 +12,76 @@ const spin = keyframes`
   }
 `;
 
+const float = keyframes`
+  50% {
+    transform: translate(0, 20px);
+  }
+`
+
 const StyledHero = styled.header`
-  width: 100%;
-  height: 60vh;
+  width: 90%;
+  margin: 0 auto;
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
   color: ${props => props.theme.black};
   position: relative;
   margin-top: 60px;
 
-  h1 {
-    font-size: 70px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 40px;
-    z-index: 80;
-    @media (max-width: 1024px) {
-      line-height: 65px;
-      font-size: 50px;
-    }
-    span {
-      display: block;
-      font-size: 25px;
-      font-weight: 400;
-      letter-spacing: normal;
-      margin-top: 16px;
-    }
+  @media (max-width: 899px) {
+    flex-direction: column;
   }
-`
-
-const StyledMoonCont = styled.span`
-  position: absolute;
-  width: 100%;
-  height: auto;
-  text-align: left;
-  z-index: 50;
 
   img {
-    animation: ${spin} 200s linear infinite;
-    width: 50vw;
+    width: 35vw;
     height: auto;
-    margin: 50px;
-
+    animation: ${float} 3s ease-out infinite;
+    z-index: 80;
+    position: relative;
     @media (max-width: 899px) {
-      margin: 10px;
-      width: 80vw;
+      width: 70vw;
+  }
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+    padding: 12px 32px;
+    z-index: 80;
+    position: relative;
+  }
+  .left {
+  }
+  .right {
+    padding: 0 32px;
+
+    h1 {
+      z-index: 80;
+      position: relative;
+      font-size: 40px;
+      font-weight: 800;
     }
   }
 `
-
 
 
 export function Hero() {
-  // const isMobile = window.screen.width < 900;
   return (
     <>
       <StyledHero>
-        <StyledMoonCont>
-          <img src={moon} alt="" />
-        </StyledMoonCont>
-        <h1>
-          {/* <img src={logo} alt="astrokitties-logo" /> */}
-          Welcome to Astrokitties
-          <StyledNotVisibleXS>
-            <span>Truly a safe token, let's moon.</span>
-          </StyledNotVisibleXS>
-        </h1>
+        <div className="left">
+          <img src={logo} alt="astrokitties-logo" />
+        </div>
+        <div className="right">
+          <h1>Welcome to Astrokitties</h1>
+          <p>
+            We are tired of all the scams that happen among tokens. So we decided to take matters into our own hands. That's why we created Astrokitties, with the intention of being 100% safe from rug pulls. How? Because we, the devs have no rugs to pull. This token is for you, let's moon.
+          </p>
+        </div>
       </StyledHero>
-      
     </>
   )
 }

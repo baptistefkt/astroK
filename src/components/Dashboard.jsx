@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import Sky from 'react-sky'
 import { Hero } from './Hero'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoins, faRecycle, faFire, faMoneyBill, faUser, faCheck, faHourglass } from '@fortawesome/free-solid-svg-icons'
@@ -10,34 +11,33 @@ import community from '../assets/community.png'
 import liquidityPool from '../assets/liquiditypool.png'
 import ship from '../assets/space-ship.png'
 import rocket from '../assets/rocket.png'
+import pumpDump from '../assets/pump-dump.png'
 
 const StyledDashboard = styled.div`
   background: rgb(222,168,218);
   background: linear-gradient(135deg, rgba(161,209,224,0.2) 20%, rgba(222,168,218,0.2) 80%);
+  position: relative;
+  #sky {
+    z-index: 60 !important;
+  }
 `
 
 const StyledGrid = styled.div`
-  padding: 20px 20px 60px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-
   @media (max-width: 899px) {
     display: flex;
     flex-direction: column;
   }
 
   > div, article {
-    background: ${props => props.theme.background};
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 16px;
-    z-index: 80;
     box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
   }
 `
 
 const StyledArticle = styled.article`
+  position: relative;
+  z-index: 80;
   min-height: 200px;
   max-height: 591px;
   border-radius: 16px;
@@ -111,15 +111,80 @@ const StyledArticle = styled.article`
   }
 `
 
-const StyledBigArticle = styled(StyledArticle)`
-  grid-column: 1/3;
-  grid-row: 2/4;
+const StyledTokenomics = styled(StyledArticle)`
+  padding: 160px 24px;
+  h4 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    small {
+      font-size: 20px;
+      margin-left: 12px;
+    }
+  }
+
+  .tokenomics {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    
+    .badge {
+      flex: 1;
+      border-radius: 100px;
+      background: rgb(222,168,218);
+      background: linear-gradient(90deg, rgba(222,168,218,0.96) 20%, rgba(161,209,224,0.96) 80%);
+      color: ${props => props.theme.background};
+      margin: 12px;
+      display: flex;
+      justify-content: space-beetween;
+      align-items: center;
+      text-align: center;
+      padding: 18px;
+      height: 60px;
+      max-width: 280px;
+      box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
+    }
+
+    .iconomic {
+      font-size: 20px;
+      color: ${props => props.theme.background};
+    }
+
+    .left {
+      color: ${props => props.theme.background};
+      margin-right: 12px;
+    }
+    .right {
+      font-weight: 600;
+      color: ${props => props.theme.background};
+    }
+  }
+`
+
+const StyledFeatures = styled(StyledArticle)`
+  grid-column: 1/4;
+  grid-row: 1/3;
   max-height: unset;
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  h4 {
+    font-size: 30px;
+    margin-bottom: 30px;
+
+    small {
+      font-size: 20px;
+      margin-left: 12px;
+    }
+  
+  }
 
   .flexContent {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 15px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 25px;
+    margin: 0 40px;
    
     @media (max-width: 899px) {
       display: flex;
@@ -131,8 +196,8 @@ const StyledBigArticle = styled(StyledArticle)`
     padding: 20px;
     text-align: center;
     border-radius: 16px;
-    /* margin: 0 15px; */
-    border: 1px solid ${props => props.theme.border};
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
 
     @media (max-width: 899px) {
       min-height: unset;
@@ -147,23 +212,41 @@ const StyledBigArticle = styled(StyledArticle)`
     margin-top: 20px;
     color: ${props => props.theme.black};
     line-height: 1.2;
+
+    small {
+      margin-left: 8px;
+      font-size: 60%;
+      font-weight: 400;
+    }
   }
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: auto;
+  }
+
+  button {
+    margin-top: 40px;
   }
 `
 
 const StyledRoadMap = styled(StyledArticle)`
-  grid-column: 3/4;
-  grid-row: 2/4;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 160px 32px;
+  max-height: unset;
+
+  .roadmap {
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 60px 0;
+  }
 
   .row {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .icon {
@@ -174,7 +257,7 @@ const StyledRoadMap = styled(StyledArticle)`
     border-radius: 5px;
     text-align: center;
     color: ${props => props.theme.black};
-    margin-right: 8px;
+    margin-right: 16px;
   }
 
   .complete {
@@ -194,11 +277,15 @@ const StyledRoadMap = styled(StyledArticle)`
 
   .text {
     color: ${props => props.theme.black};
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
+
+    @media (max-width: 899px) {
+      font-size: 14px;
+    }
     
     span {
-      margin-left: 4px;
+      margin-left: 8px;
       color: rgb(71, 171, 93);
       font-size: 80%;
     }
@@ -207,269 +294,238 @@ const StyledRoadMap = styled(StyledArticle)`
       color: rgb(238, 141, 43);
     }
   }
-`
 
-const fly = keyframes`
-	98.001%, 0% {
-    display: block;
-		transform: translateX(-200%) translateY(100vh) rotateZ(0deg)
-	}
+  h4 {
+    font-size: 30px;
+    margin-bottom: 30px;
 
-	15% {
-		transform: translateX(100vw) translateY(-100%) rotateZ(180deg)
-	}
-
-	15.001%, 18% {
-		transform: translateX(100vw) translateY(-30%) rotateZ(0deg)
-	}
-
-	40% {
-		transform: translateX(-200%) translateY(3vh) rotateZ(-180deg)
-	}
-
-	40.001%, 43% {
-		transform: translateX(-200%) translateY(-100%) rotateZ(-180deg)
-	}
-
-	65% {
-		transform: translateX(100vw) translateY(50vh) rotateZ(0deg)
-	}
-
-	65.001%, 68% {
-		transform: translateX(20vw) translateY(-200%) rotateZ(180deg)
-	}
-
-	95% {
-		transform: translateX(10vw) translateY(100vh) rotateZ(0deg)
-	}
-`
-
-const StyledRocket = styled.img`
-  width: 150px;
-  height: auto;
-  transform: translateX(-120%) translateY(-120%) rotateZ(0);
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 60;
-  animation: ${fly} 50s linear infinite;
-  @media (max-width: 899px) {
-    width: 100px;
+    small {
+      font-size: 20px;
+      margin-left: 12px;
+    }
+  
   }
-
-`
-const StyledShip = styled.img`
-  width: 120px;
-  height: auto;
-  transform: translateX(-120%) translateY(-120%) rotateZ(0);
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 60;
-  animation: ${fly} 80s linear infinite;
-  animation-direction: reverse;
+  
 `
 
 export function Dashboard() {
   return (
     <div style={{backgroundColor: 'white'}}>
       <StyledDashboard>
-      <Hero />
-      <StyledGrid>
-        <StyledArticle>
-          <h4>
-            About Astrokitties
-            <small>Brief description</small>
-          </h4>
-          <p>We are tired of all the scams that happen among tokens. So we decided to take matters into our own hands. That's why we created Astrokitties, with the intention of being 100% safe from rug pulls. How? Because we, the devs have no rugs to pull. This token is for you, let's moon.</p>
-        </StyledArticle>
-        <StyledArticle>
+        <Sky
+            images={{
+              0: ship,
+              1: rocket,
+            }}
+            how={10}
+            time={20}
+            size={'100px'}
+          />
+        <Hero />
+        <StyledTokenomics>
           <h4>
             Tokenomics
             <small>Update daily</small>
           </h4>
-          <div className="content">
-            <div className="flex">
+          <div className="tokenomics">
+            <div className="badge">
               <div className="left">
-                <div className="iconContainer">
+                <div className="iconomic">
                   <FontAwesomeIcon icon={faCoins} />
                 </div>
-                <div>Max Supply</div>
               </div>
-              <div className="right">1,000,000,000,000,000</div>
+              <div className="right">
+                <div>Max Supply</div>
+                1,000,000,000,000,000
+              </div>
             </div>
-            <div className="flex">
+            <div className="badge">
               <div className="left">
-                <div className="iconContainer">
+                <div className="iconomic">
                   <FontAwesomeIcon icon={faRecycle} />
                 </div>
-                <div>Circulating</div>
               </div>
-              <div className="right">720,093,318,120,919</div>
+              <div className="right">
+                <div>Circulating</div>
+                720,093,318,120,919
+              </div>
             </div>
-            <div className="flex">
+            <div className="badge">
               <div className="left">
-                <div className="iconContainer">
+                <div className="iconomic">
                   <FontAwesomeIcon icon={faFire} />
                 </div>
-                <div>Burned</div>
               </div>
-              <div className="right">279,906,681,879,081</div>
+              <div className="right">
+                <div>Burned</div>
+                  279,906,681,879,081
+              </div>
             </div>
-            <div className="flex">
+            <div className="badge">
               <div className="left">
-                <div className="iconContainer">
+                <div className="iconomic">
                   <FontAwesomeIcon icon={faMoneyBill} />
                 </div>
-                <div>Marketcap</div>
               </div>
-              <div className="right">$7,132,960</div>
+              <div className="right">
+                <div>Marketcap</div>
+                $7,132,960
+              </div>
             </div>
-            <div className="flex">
+            <div className="badge">
               <div className="left">
-                <div className="iconContainer">
+                <div className="iconomic">
                   <FontAwesomeIcon icon={faUser} />
                 </div>
-                <div>Holders</div>
               </div>
-              <div className="right">4,343</div>
+              <div className="right">
+                <div>Holders</div>
+                4,343
+              </div>
             </div>
           </div>
-        </StyledArticle>
-        <StyledArticle>
-          <h4>
-            Audit by solidity.finance
-            <small>100% Passed</small>
-          </h4>
-          <p>
-            <i>
-              "Astrokitties is a new competitor in the meme-coin space that has gained a large community following in a short timeframe.
-              <br/><br/>
-              No security issues were identified in our analysis."
-            </i>
-            <span className="bolder">- solidity.finance</span>
-          </p>
-          <a href="#">
-            <StyledButton>
-              Read full analysis
-            </StyledButton>
-          </a>
-        </StyledArticle>
-        <StyledBigArticle>
-          <h4>
-            Points of interest
-            <small>Reasons why to own Astrokitties</small>
-          </h4>
-          <div className="flexContent">
-            <div className="items one">
-              <img src={locker} alt=""/>
-              <h3>Completely Secured</h3>
-              <p>Audited smart contract, no big devs holdings (all burnt from start), Liquidity Pool locked for 5 years!</p>
+        </StyledTokenomics>
+        <StyledGrid>
+          <StyledFeatures>
+            <h4>
+              Features
+              <small>Reasons why to own Astrokitties</small>
+            </h4>
+            <div className="flexContent">
+              <div className="items one">
+                <img src={locker} alt=""/>
+                <h3>Highly Secured</h3>
+                <p>All initial liquidity provided has been locked with UniCrypt. The contract owner has been renounced, leaving the contract trustless for the ASTROKITTIES community.</p>
+              </div>
+              <div className="items two">
+                <img src={coin} alt=""/>
+                <h3>RFI Static Rewards</h3>
+                <p>2% of every transaction is taken and re distributed to all $SMRAT holders. The burn address is also a holder thus each transaction helps deflate the supply.</p>
+              </div>
+              <div className="items">
+                <img src={community} alt=""/>
+                <h3>Fair Launch & Community Built</h3>
+                <p>Community driven & fair launch. There is no pre-sale. Dev will add 80% of the token supply to LP on PancakeSwap and participate in the fair launch with everyone else.</p>
+              </div>
+              <div className="items">
+                <img src={liquidityPool} alt=""/>
+                <h3>Automatic Liquidity Pool</h3>
+                <p>4% of every transaction contributes toward automatically generating further liquidity on Pancake Swap. Benefiting long term for Astrokitties holders the most!</p>
+              </div>
+              <div className="items">
+                <img src={pumpDump} alt=""/>
+                <h3>Anti Pump-Dump-Exist Whales</h3>
+                <p>Transactions (sell/buy) that trade more than 0.01% of the total supply will be rejected. Whales who make a transfer (between 2 wallets) that is larger than 0.01% of the total supply will be charged for 2 BNB.</p>
+              </div>
+              <div className="items">
+                <h3>
+                  Audit by solidity.finance
+                  <small>100% Passed</small>
+                </h3>
+                <p>
+                  <i>
+                    "Astrokitties is a new competitor in the meme-coin space that has gained a large community following in a short timeframe.
+                    <br/><br/>
+                    No security issues were identified in our analysis."
+                  </i>
+                  <span className="bolder">- solidity.finance</span>
+                </p>
+                <a href="#">
+                  <StyledButton>
+                    Read full analysis
+                  </StyledButton>
+                </a>
+              </div>
             </div>
-            <div className="items two">
-              <img src={coin} alt=""/>
-              <h3>Rewarding for Holders</h3>
-              <p>Keep holding your Astrokitties tokens, and you will earn more. For each transaction, a 3% fee is sent back to our beloved holders.</p>
+          </StyledFeatures>
+          
+          <StyledRoadMap>
+            <h4>
+              Roadmap
+              <small>Trace our work</small>
+            </h4>
+            <div className="roadmap">
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Presale live on DXSales <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Presale sold out <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Listing on PANCAKESWAP <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Marketing on Poocoin <span>Live now</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Reach 1000 holders <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Audit Astrokitties Smart Contract <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon complete">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
+                <div className="text">Reach 3000 holders <span>Completed</span></div>
+              </div>
+              <div className="row">
+                <div className="icon pending">
+                  <FontAwesomeIcon icon={faHourglass} />
+                </div>
+                <div className="text">Launch holder contest ($1000) <span className="orange">Contest live</span></div>
+              </div>
+              <div className="row">
+                <div className="icon pending">
+                  <FontAwesomeIcon icon={faHourglass} />
+                </div>
+                <div className="text">Litepaper released <span className="orange">In progress</span></div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">Whitebit listing</div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">Reach 5000 holders</div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">Launch second holder contest ($2000)</div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">Whitepaper released</div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">CoinmarketCap & Coingecko Listing</div>
+              </div>
+              <div className="row">
+                <div className="icon notComplete" />
+                <div className="text">Listing on Exchange</div>
+              </div>
             </div>
-            <div className="items three">
-              <img src={community} alt=""/>
-              <h3>Inventive Construction</h3>
-              <p>With a combination of burning, automatic LP filling and rewarding of holders, Astrokitties is set to rise!</p>
-            </div>
-            <div className="items three">
-              <img src={liquidityPool} alt=""/>
-              <h3>Inventive Construction</h3>
-              <p>With a combination of burning, automatic LP filling and rewarding of holders, Astrokitties is set to rise!</p>
-            </div>
-          </div>
-        </StyledBigArticle>
-        <StyledRoadMap>
-          <h4>
-            Roadmap
-            <small>Trace our work</small>
-          </h4>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Presale live on DXSales <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Presale sold out <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Listing on PANCAKESWAP <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Marketing on Poocoin <span>Live now</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Reach 1000 holders <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Audit Astrokitties Smart Contract <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon complete">
-              <FontAwesomeIcon icon={faCheck} />
-            </div>
-            <div className="text">Reach 3000 holders <span>Completed</span></div>
-          </div>
-          <div className="row">
-            <div className="icon pending">
-              <FontAwesomeIcon icon={faHourglass} />
-            </div>
-            <div className="text">Launch holder contest ($1000) <span className="orange">Contest live</span></div>
-          </div>
-          <div className="row">
-            <div className="icon pending">
-              <FontAwesomeIcon icon={faHourglass} />
-            </div>
-            <div className="text">Litepaper released <span className="orange">In progress</span></div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">Whitebit listing</div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">Reach 5000 holders</div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">Launch second holder contest ($2000)</div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">Whitepaper released</div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">CoinmarketCap & Coingecko Listing</div>
-          </div>
-          <div className="row">
-            <div className="icon notComplete" />
-            <div className="text">Listing on Exchange</div>
-          </div>
-        </StyledRoadMap>
-        <StyledRocket src={rocket} />
-        <StyledShip src={ship} />
-      </StyledGrid>
+          </StyledRoadMap>
+        </StyledGrid>
       </StyledDashboard>
     </div>
   )
