@@ -150,7 +150,7 @@ const StyledTokenomics = styled(StyledArticle)`
       padding: 18px;
       height: 50px;
       max-width: 280px;
-      box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
+      box-shadow: 0 31px 35px rgb(0 0 0 / 5%);
 
       @media (max-width: 899px) {
         max-width: unset; 

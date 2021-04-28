@@ -22,7 +22,8 @@ const StyledHero = styled.header`
   margin-top: 60px;
 
   @media (max-width: 899px) {
-    flex-direction: column;
+    display: block;
+    height: fit-content;
   }
 
   img {
@@ -47,7 +48,12 @@ const StyledHero = styled.header`
   .left {
   }
   .right {
-    padding: 0 32px;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.90);
+    border-radius: 16px;
+    box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
+    position: relative;
+    z-index: 80;
 
     h1 {
       z-index: 80;
