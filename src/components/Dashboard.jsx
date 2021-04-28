@@ -17,8 +17,10 @@ const StyledDashboard = styled.div`
   background: rgb(222,168,218);
   background: linear-gradient(135deg, rgba(161,209,224,0.2) 20%, rgba(222,168,218,0.2) 80%);
   position: relative;
+  overflow: hidden;
   #sky {
     z-index: 60 !important;
+    transform: scale(2);
   }
 `
 
@@ -112,21 +114,27 @@ const StyledArticle = styled.article`
 `
 
 const StyledTokenomics = styled(StyledArticle)`
-  padding: 160px 24px;
-  h4 {
-    font-size: 30px;
-    margin-bottom: 30px;
-    small {
-      font-size: 20px;
-      margin-left: 12px;
-    }
+  padding: 60px 24px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media (max-width: 899px) {
+    position: relative;
   }
+
 
   .tokenomics {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 10px 0;
+
+    @media (max-width: 899px) {
+      padding-bottom: 100px;
+      flex-direction: column;
+    }
     
     .badge {
       flex: 1;
@@ -136,13 +144,18 @@ const StyledTokenomics = styled(StyledArticle)`
       color: ${props => props.theme.background};
       margin: 12px;
       display: flex;
-      justify-content: space-beetween;
+      justify-content: center;
       align-items: center;
       text-align: center;
       padding: 18px;
-      height: 60px;
+      height: 50px;
       max-width: 280px;
       box-shadow: 0 31px 35px rgb(0 0 0 / 10%);
+
+      @media (max-width: 899px) {
+        max-width: unset; 
+        margin: 12px 42px; 
+      }
     }
 
     .iconomic {
@@ -152,7 +165,7 @@ const StyledTokenomics = styled(StyledArticle)`
 
     .left {
       color: ${props => props.theme.background};
-      margin-right: 12px;
+      margin-right: 20px;
     }
     .right {
       font-weight: 600;
@@ -246,39 +259,56 @@ const StyledRoadMap = styled(StyledArticle)`
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-left: 2px solid #ccc;
+
+    &:last-of-type {
+      border-left: none;
+      position: relative;
+      left: 2px;
+    }
   }
 
   .icon {
-    font-size: 9px;
-    line-height: 14px;
-    width: 17px;
-    height: 17px;
-    border-radius: 5px;
+    font-size: 12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 26px;
     text-align: center;
     color: ${props => props.theme.black};
     margin-right: 16px;
+    position: relative;
+    top: -9px;
+    left: -14px;
+    z-index: 2;
+
+    svg {
+      position: relative;
+      top: 1px;
+    }
   }
 
   .complete {
-    background: rgba(71, 171, 93, 0.4);
+    background: #d8f5ce;
     border: 2px solid rgb(71, 171, 93);
   }
 
   .pending {
-    background: rgba(238, 141, 43, 0.4);
+    background: #ffd1a3;
     border: 2px solid rgb(238, 141, 43);
   }
 
   .notComplete {
-    background: rgba(161,209,224, 0.2);
-    border: 2px solid rgb(161,209,224);
+    background: #f0f0f0;
+    border: 2px solid #ccc;
   }
 
   .text {
     color: ${props => props.theme.black};
     font-size: 16px;
     font-weight: 600;
+    margin-top: -10px;
+    padding-bottom: 6px;
 
     @media (max-width: 899px) {
       font-size: 14px;
@@ -317,16 +347,12 @@ export function Dashboard() {
               0: ship,
               1: rocket,
             }}
-            how={10}
+            how={20}
             time={20}
-            size={'100px'}
+            size={'50px'}
           />
         <Hero />
         <StyledTokenomics>
-          <h4>
-            Tokenomics
-            <small>Update daily</small>
-          </h4>
           <div className="tokenomics">
             <div className="badge">
               <div className="left">
