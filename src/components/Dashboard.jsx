@@ -282,9 +282,13 @@ const StyledRoadMap = styled(StyledArticle)`
     left: -14px;
     z-index: 2;
 
+    @media (max-width: 899px) {
+      margin-right: 0px;
+    }
+
     svg {
       position: relative;
-      top: 1px;
+      top: 2px;
     }
   }
 
@@ -311,7 +315,7 @@ const StyledRoadMap = styled(StyledArticle)`
     padding-bottom: 6px;
 
     @media (max-width: 899px) {
-      font-size: 14px;
+      font-size: 13px;
     }
     
     span {
