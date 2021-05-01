@@ -12,6 +12,9 @@ import liquidityPool from '../assets/liquiditypool.png'
 import ship from '../assets/space-ship.png'
 import rocket from '../assets/rocket.png'
 import pumpDump from '../assets/pump-dump.png'
+import managerNFT from '../assets/nft-manager.jpg'
+import designerNFT from '../assets/nft-designer.jpg'
+import devNFT from '../assets/nft-dev.jpg'
 
 const StyledDashboard = styled.div`
   background: rgb(222,168,218);
@@ -202,6 +205,7 @@ const StyledFeatures = styled(StyledArticle)`
     @media (max-width: 899px) {
       display: flex;
       flex-direction: column;
+      margin: 0;
     }
   }
 
@@ -240,6 +244,62 @@ const StyledFeatures = styled(StyledArticle)`
 
   button {
     margin-top: 40px;
+  }
+`
+
+export const StyledNftSection = styled.section`
+  margin: 140px 0 0;
+  padding: 24px;
+  color: ${props => props.theme.black};
+
+  h4 {
+    font-size: 30px;
+    margin-bottom: 30px;
+
+    small {
+      font-size: 20px;
+      margin-left: 12px;
+    }
+  
+  }
+`
+
+const StyledNFT = styled(StyledArticle)`
+  display: flex;
+  margin: 0 40px;
+
+  @media (max-width: 899px) {
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .NFT {
+    padding: 24px 12px;
+    margin: 0 12px;
+
+    @media (max-width: 899px) {
+      padding: 28px 12px;
+      border-bottom: 1px solid ${props => props.theme.border};
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+
+    a {
+      color: #7BBDDF;
+      font-weight: 600;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      transition: 0.15s ease-out;
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
   }
 `
 
@@ -468,7 +528,40 @@ export function Dashboard() {
               </div>
             </div>
           </StyledFeatures>
-          
+          <StyledNftSection>
+            <h4>
+              Buy our NFT
+            </h4>
+            <StyledNFT>
+              <div className="NFT">
+                <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082981838288322561" target="_blank" rel="noreferrer">
+                  <img src={managerNFT} alt="manager nft"/>
+                </a>
+                  <p>
+                    Support the community manager and lead of Astrokitties by buying this nft!
+                  </p>
+                  <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082981838288322561" target="_blank" rel="noreferrer">buy this NFT</a>
+              </div>
+              <div className="NFT">
+                <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082979639265067009" target="_blank" rel="noreferrer">
+                  <img src={designerNFT} alt="designer nft"/>
+                </a>
+                  <p>
+                    Support the designer of astrokitties by buying this nft!
+                  </p>
+                  <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082979639265067009" target="_blank" rel="noreferrer">buy this NFT</a>
+              </div>
+              <div className="NFT">
+                <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082980738776694785" target="_blank" rel="noreferrer">
+                  <img src={devNFT} alt="developer nft"/>
+                </a>
+                  <p>
+                    Support the dev behind AstroKitties by buying this nft!
+                  </p>
+                  <a href="https://opensea.io/assets/0x495f947276749ce646f68ac8c248420045cb7b5e/103650118009987479586759322974484951453890178990420087406057082980738776694785" target="_blank" rel="noreferrer">buy this NFT</a>
+              </div>
+            </StyledNFT>
+          </StyledNftSection>
           <StyledRoadMap>
             <h4>
               Roadmap
